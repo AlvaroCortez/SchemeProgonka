@@ -106,6 +106,46 @@ public class SquareMatrix extends Matrix {
         return X;
     }
 
+    public VectorMatrix progonka(VectorMatrix b) throws MatrixIndexOutOfBoundsException { //не рабочий
+        VectorMatrix Xnew = new VectorMatrix(N);
+        VectorMatrix B = new VectorMatrix(N);
+        VectorMatrix A = new VectorMatrix(N);
+        VectorMatrix C = new VectorMatrix(N);
+
+        A.setElement(0,0);
+        for (int i = 1; i < N; i++) {
+            A.setElement(i,getElement(i,i-1));
+        }
+        for (int i = 0; i < N; i++) {
+            C.setElement(i,getElement(i,i));
+        }
+        for (int i = 0; i < N-1; i++) {
+            B.setElement(i,getElement(i,i+1));
+        }
+        B.setElement(N-1,0);
+
+        for (int i = 0; i < N; i++) {
+            Xnew.setElement(i, 0);
+        }
+
+        double m;
+        for (int i = 1; i < N; i++) {
+            m = A.getElement(i) / C.getElement(i-1);
+            C.setElement(i,C.getElement(i)-m*B.getElement(i-1));
+            b.setElement(i,b.getElement(i)-m*b.getElement(i-1));
+        }
+        Xnew.setElement(N-1, b.getElement(N-1)/C.getElement(N-1));
+        for (int i = N - 2; i >= 0 ; i--) {
+            Xnew.setElement(i,
+                    (b.getElement(i) -
+                            (B.getElement(i) *
+                                    Xnew.getElement(i+1))) /
+                                            C.getElement(i));
+        }
+        return Xnew;
+    }
+
+
     private boolean converged(VectorMatrix Xnew, VectorMatrix X) throws MatrixIndexOutOfBoundsException {
         double norm = 0;
         for (int i = 0; i < N; i++)
