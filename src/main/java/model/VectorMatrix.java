@@ -29,4 +29,8 @@ public class VectorMatrix extends Matrix {
         }
         return matrix;
     }
+
+    public int size() {
+        return N;
+    }
 }

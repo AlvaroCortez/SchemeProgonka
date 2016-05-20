@@ -217,4 +217,8 @@ public class SquareMatrix extends Matrix {
     public static void setE(double e) {
         SquareMatrix.e = e;
     }
+
+    public double getSize(){
+        return N;
+    }
 }
