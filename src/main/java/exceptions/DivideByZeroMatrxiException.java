@@ -11,4 +11,8 @@ public class DivideByZeroMatrxiException extends Exception{
     public DivideByZeroMatrxiException(String msg){
         super(msg);
     }
+
+    public DivideByZeroMatrxiException(String msg, String master, String branch) {
+        super(msg);
+    }
 }
