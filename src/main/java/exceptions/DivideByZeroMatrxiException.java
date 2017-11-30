@@ -19,4 +19,8 @@ public class DivideByZeroMatrxiException extends Exception{
     public DivideByZeroMatrxiException(String msg, String testBranch) {
         super(msg);
     }
+
+    public DivideByZeroMatrxiException(String msg, String testBranch, String newCommit, String to, String master) {
+        super(msg);
+    }
 }
